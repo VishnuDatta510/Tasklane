@@ -1,0 +1,30 @@
+# Runtime dependencies, pinned to the minor version.
+# Patch upgrades are safe; minor upgrades are a deliberate edit to this file.
+
+# Core
+Django>=5.2,<5.3
+djangorestframework>=3.18,<3.19
+psycopg[binary]>=3.3,<3.4
+django-environ>=0.14,<0.15
+
+# Auth
+djangorestframework-simplejwt>=5.4,<6.0
+
+# API features
+django-filter>=25.1
+drf-spectacular>=0.28,<0.29
+drf-nested-routers>=0.94,<0.95
+django-cors-headers>=4.7,<5.0
+
+# Background work + cache
+celery>=5.4,<6.0
+redis>=5.2,<7.0
+django-redis>=5.4,<7.0
+django-celery-beat>=2.7,<3.0
+
+# Files
+Pillow>=11.0
+
+# Serving
+gunicorn>=23.0
+whitenoise>=6.8

@@ -1,0 +1,44 @@
+# Environment / secrets
+.env
+.env.*
+!.env.example
+
+# Virtualenvs
+.venv/
+venv/
+env/
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Node
+node_modules/
+.next/
+*.tsbuildinfo
+
+# Django
+*.log
+db.sqlite3
+db.sqlite3-journal
+/media/
+backend/staticfiles/*
+!backend/staticfiles/.gitkeep
+
+# Editors / OS
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+
+# Local working notes, not part of the project
+BUILD_PLAN.md
+PRODUCT.md
+.impeccable/
+AGENTS.md
+CLAUDE.md
