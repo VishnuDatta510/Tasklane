@@ -44,6 +44,7 @@ jobs:
       DATABASE_URL: postgres://tracker:tracker@localhost:5432/tracker_test
       REDIS_URL: redis://localhost:6379/0
       EMAIL_BACKEND: django.core.mail.backends.locmem.EmailBackend
+      SECURE_SSL_REDIRECT: "False"
 
     defaults:
       run:
