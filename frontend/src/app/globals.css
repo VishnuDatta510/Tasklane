@@ -1,0 +1,213 @@
+@import "tailwindcss";
+
+/* ---------------------------------------------------------------------------
+   TaskLane — visual system
+   A museum wayfinding program: paper ground, hairline rules doing the dividing,
+   one signal accent, wall-label anatomy for every record.
+   --------------------------------------------------------------------------- */
+
+@theme {
+  /* Ground and paper */
+  --color-paper: #ffffff;
+  --color-paper-2: #f5f6f8;
+  --color-paper-3: #eceef1;
+  --color-plinth: #12141a;
+
+  /* Ink */
+  --color-ink: #12141a;
+  --color-ink-2: #464b57;
+  --color-ink-3: #6f7684;
+  --color-ink-4: #99a0ae;
+
+  /* Rules — hairlines carry the structure, not shadows */
+  --color-rule: #e2e5ea;
+  --color-rule-strong: #c9cdd6;
+
+  /* The single accent: signal cobalt. Primary action, current selection,
+     live state. Never decoration. */
+  --color-signal: #1b3bef;
+  --color-signal-ink: #142ec0;
+  --color-signal-wash: #eef1fe;
+
+  /* Status marks. Validated as a categorical palette (lightness band, chroma
+     floor, CVD separation, normal-vision floor, contrast) against both the
+     white and the panel surface. To-do was originally a neutral gray, which
+     failed the chroma floor: below OKLCH C 0.10 a hue reads as gray and stops
+     carrying identity in a chart. Status never travels alone -- every mark
+     ships beside its label. */
+  --color-todo: #5470b8;
+  --color-progress: #b4690e;
+  --color-review: #6b3fc4;
+  --color-done: #1a7f52;
+
+  /* Priority */
+  --color-urgent: #c62828;
+  --color-high: #b4690e;
+  --color-medium: #6f7684;
+  --color-low: #99a0ae;
+
+  --color-danger: #c62828;
+  --color-danger-wash: #fdf0ef;
+  --color-success: #1a7f52;
+  --color-success-wash: #edf7f1;
+
+  --font-sans: var(--font-archivo), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-mono-face), ui-monospace, "SFMono-Regular", monospace;
+
+  --radius-label: 2px;
+
+  --ease-out-strong: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@layer base {
+  :root {
+    color-scheme: light;
+    --shell-nav: 244px;
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-synthesis-weight: none;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* Every figure in this product is compared against another figure. */
+  table,
+  .tnum {
+    font-variant-numeric: tabular-nums;
+    font-feature-settings: "tnum" 1;
+  }
+
+  /* Browser surfaces belong to the design system too. */
+  ::selection {
+    background: var(--color-signal);
+    color: #fff;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-signal);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+
+  input,
+  textarea,
+  select,
+  button {
+    font: inherit;
+    color: inherit;
+  }
+
+  input::placeholder,
+  textarea::placeholder {
+    color: var(--color-ink-4);
+  }
+
+  a {
+    color: inherit;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.18em;
+  }
+
+  * {
+    scrollbar-color: var(--color-rule-strong) transparent;
+    scrollbar-width: thin;
+  }
+
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-rule-strong);
+    border: 3px solid var(--color-paper);
+    border-radius: 999px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--color-ink-4);
+  }
+}
+
+@layer components {
+  /* The wall label: the anatomy every record in this product inherits.
+     A tracked small-caps field name, then the value. */
+  .field-label {
+    font-size: 10px;
+    line-height: 1;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: var(--color-ink-3);
+  }
+
+  .plate {
+    background: var(--color-paper);
+    border: 1px solid var(--color-rule);
+  }
+
+  /* Display voice: wall-signage width. */
+  .display {
+    font-stretch: 112%;
+    font-weight: 600;
+    letter-spacing: -0.025em;
+    line-height: 0.98;
+    text-wrap: balance;
+  }
+
+  .measure {
+    max-width: 68ch;
+  }
+}
+
+@layer utilities {
+  .rule-t {
+    border-top: 1px solid var(--color-rule);
+  }
+  .rule-b {
+    border-bottom: 1px solid var(--color-rule);
+  }
+  .rule-l {
+    border-left: 1px solid var(--color-rule);
+  }
+  .rule-r {
+    border-right: 1px solid var(--color-rule);
+  }
+
+  .grid-paper {
+    background-image:
+      linear-gradient(to right, var(--color-rule) 1px, transparent 1px),
+      linear-gradient(to bottom, var(--color-rule) 1px, transparent 1px);
+    background-size: 96px 96px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@keyframes pulse-soft {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.55; }
+}
+
+@keyframes label-settle {
+  from { opacity: 0; transform: translateY(-6px) scale(0.985); }
+  to   { opacity: 1; transform: none; }
+}
